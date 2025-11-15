@@ -1,0 +1,188 @@
+
+1.server.js
+
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const connectDB = require("./config/db");
+
+
+dotenv.config();
+connectDB();
+
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+
+const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
+
+
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+
+
+app.get("/", (req, res) => {
+res.send("Zonama Backend Running...");
+});
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+2. config/db.js
+
+const mongoose = require("mongoose");
+
+
+const connectDB = async () => {
+try {
+const conn = await mongoose.connect(process.env.MONGO_URI);
+console.log(`MongoDB Connected: ${conn.connection.host}`);
+} catch (error) {
+console.error(error);
+process.exit(1);
+}
+};
+
+
+module.exports = connectDB;
+
+
+3.models/userModel.js
+
+
+const mongoose = require("mongoose");
+
+
+const userSchema = mongoose.Schema({
+name: { type: String, required: true },
+email: { type: String, required: true, unique: true },
+password: { type: String, required: true }
+}, { timestamps: true });
+
+
+module.exports = mongoose.model("User", userSchema);
+
+
+4.models/productModel.js
+
+
+const mongoose = require("mongoose");
+
+
+const productSchema = mongoose.Schema({
+name: String,
+price: Number,
+image: String,
+category: String,
+description: String
+}, { timestamps: true });
+
+
+module.exports = mongoose.model("Product", productSchema);
+
+
+5.controllers/userController.js
+
+
+const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+
+exports.registerUser = async (req, res) => {
+const { name, email, password } = req.body;
+const userExists = await User.findOne({ email });
+if (userExists) return res.status(400).json({ message: "User already exists" });
+
+
+const hashedPassword = await bcrypt.hash(password, 10);
+const user = await User.create({ name, email, password: hashedPassword });
+res.json(user);
+};
+
+
+exports.loginUser = async (req, res) => {
+const { email, password } = req.body;
+const user = await User.findOne({ email });
+if (!user) return res.status(400).json({ message: "User not found" });
+
+
+const match = await bcrypt.compare(password, user.password);
+if (!match) return res.status(400).json({ message: "Incorrect password" });
+
+
+const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+res.json({ token });
+};
+
+
+6.routes/userRoutes.js
+
+const express = require("express");
+const router = express.Router();
+const { registerUser, loginUser } = require("../controllers/userController");
+
+
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+
+
+module.exports = router;
+
+
+7.routes/productRoutes.js (basic CRUD skeleton)
+
+const express = require("express");
+const router = express.Router();
+const Product = require("../models/productModel");
+
+
+router.get("/", async (req, res) => {
+const products = await Product.find({});
+res.json(products);
+});
+
+
+router.post("/", async (req, res) => {
+const product = await Product.create(req.body);
+res.json(product);
+});
+
+
+module.exports = router;
+
+
+8..env (example)
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+
+9.package.json (dependencies only)
+
+{
+"name": "zonama-backend",
+"version": "1.0.0",
+"main": "server.js",
+"scripts": {
+"start": "node server.js"
+},
+"dependencies": {
+"bcryptjs": "^2.4.3",
+"cors": "^2.8.5",
+"dotenv": "^16.0.0",
+"express": "^4.18.2",
+"jsonwebtoken": "^9.0.0",
+"mongoose": "^7.5.0"
+}
+}
+
+
+
+
