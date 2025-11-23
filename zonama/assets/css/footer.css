@@ -1,0 +1,62 @@
+/* ===== Zonama Footer - Premium Sticky Footer ===== */
+
+/* Ensure body and html use full height and flex layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wrapper for main page content */
+.page-wrapper {
+    flex: 1 0 auto; /* grows to push footer down */
+}
+
+/* Footer styling */
+.footer {
+    background-color: #1F1F1F; /* Dark gray */
+    color: #FFFFFF;
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 3px solid #D4AF37; /* Gold accent */
+    font-family: 'Arial', sans-serif;
+    flex-shrink: 0; /* prevents shrinking */
+}
+
+/* Footer content max width */
+.footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo styling */
+.footer-logo h2 {
+    color: #D4AF37; /* Gold logo */
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* Links styling */
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: #FFFFFF;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #D4AF37; /* Gold hover effect */
+}
+
+/* Copy right text */
+.footer-copy p {
+    font-size: 14px;
+    color: #CCCCCC;
+}

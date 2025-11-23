@@ -1,0 +1,62 @@
+/* Orders page - Zonama Premium Palette */
+.orders-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1F1F1F;
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    color: #FFFFFF;
+}
+
+.orders-container h1 {
+    text-align: center;
+    color: #D4AF37;
+    margin-bottom: 30px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th, .orders-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+}
+
+.orders-table th {
+    background-color: #2A2A2A;
+    font-weight: bold;
+}
+
+.details-btn {
+    background-color: #D4AF37;
+    color: #000000;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.details-btn:hover {
+    background-color: #b8912b;
+}
+
+.empty-msg {
+    text-align: center;
+    font-size: 18px;
+    margin: 40px 0;
+}
+
+.empty-msg a {
+    color: #D4AF37;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.empty-msg a:hover {
+    color: #b8912b;
+}

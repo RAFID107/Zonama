@@ -1,0 +1,74 @@
+/* Profile Page - Zonama Premium Palette */
+.profile-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #1F1F1F;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+.profile-container h1 {
+    text-align: center;
+    color: #D4AF37;
+    margin-bottom: 25px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form label {
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+.profile-form input,
+.profile-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 15px;
+    background-color: #2A2A2A;
+    color: #FFFFFF;
+}
+
+.profile-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.update-btn {
+    background-color: #D4AF37;
+    color: #000000;
+    padding: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.update-btn:hover {
+    background-color: #b8912b;
+}
+
+.error-msg {
+    background-color: #FF4C4C;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.success-msg {
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
